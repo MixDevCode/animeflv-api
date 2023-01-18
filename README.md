@@ -202,7 +202,7 @@ Una lista JSON con animes próximos a estrenarse.
       <a href="https://github.com/Shompi">Shompi</a>
     </td>
     <td>
-      <center><a href="https://github.com/MixDevCode">MixDevCode</a></center>
+      <a href="https://github.com/MixDevCode">MixDevCode</a>
     </td>
   </tr>
 </table>
