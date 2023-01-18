@@ -22,15 +22,12 @@
   "author": "MixDevCode",
   "license": "ISC",
   "dependencies": {
+    "@types/expect": "^24.3.0",
     "cheerio": "^1.0.0-rc.12",
     "cloudscraper": "^4.6.0"
   },
   "devDependencies": {
-    "@types/bluebird": "^3.5.38",
-    "@types/expect": "^24.3.0",
     "@types/mocha": "^10.0.1",
-    "@types/request": "^2.48.8",
-    "@types/request-promise": "^4.1.48",
     "chai": "^4.3.7",
     "ts-mocha": "^10.0.0",
     "ts-node": "^10.9.1"
