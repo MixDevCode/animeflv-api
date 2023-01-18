@@ -1,8 +1,8 @@
 /**
-	This script was made by
-	@MixDevCode
-	and Typed by
-	@Shompi
+    This script was made by
+    @MixDevCode
+    and Typed by
+    @Shompi
  */
 
 import cloudscraper from 'cloudscraper';
@@ -18,38 +18,38 @@ export interface SearchAnimeData {
 }
 
 export interface AnimeData {
-	title: string
-	alternative_titles: string[]
-	status: string
-	rating: string
-	type: string
-	cover: string
-	synopsis: string
-	genres: string[]
-	episodes: number
-	url: string
+    title: string
+    alternative_titles: string[]
+    status: string
+    rating: string
+    type: string
+    cover: string
+    synopsis: string
+    genres: string[]
+    episodes: number
+    url: string
 }
 
 let options: cloudscraper.OptionsWithUrl = {
-	headers: {
-		'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
-		'Cache-Control': 'private',
-		'Referer': 'https://www.google.com/search?q=animeflv',
-		'Connection': 'keep-alive',
-	},
+    headers: {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/108.0.0.0 Safari/537.36',
+        'Cache-Control': 'private',
+        'Referer': 'https://www.google.com/search?q=animeflv',
+        'Connection': 'keep-alive',
+    },
     uri: ""
 }
 
 export async function searchAnime(query: string): Promise<SearchAnimeData[]> {
     try {
-        
+
         options.uri = 'https://www3.animeflv.net/browse?q=' + query.toLowerCase().replace(/\s+/g, "+");
-        
+
         const searchData = (await cloudscraper(options)) as string;
         const $ = load(searchData);
-        
+
         let search: SearchAnimeData[] = []
-        if($('body > div.Wrapper > div > div > main > ul > li').length > 0) {
+        if ($('body > div.Wrapper > div > div > main > ul > li').length > 0) {
             $('body > div.Wrapper > div > div > main > ul > li').each((i, el) => {
                 let temp: SearchAnimeData = {
                     title: $(el).find('h3').text(),
@@ -59,7 +59,7 @@ export async function searchAnime(query: string): Promise<SearchAnimeData[]> {
                     type: $(el).find('a > div > span.Type').text(),
                     url: 'https://www3.animeflv.net' + ($(el).find('a').attr('href') as string)
                 }
-                
+
                 search.push(temp);
             });
         };
@@ -69,9 +69,9 @@ export async function searchAnime(query: string): Promise<SearchAnimeData[]> {
     }
 }
 
-export async function getAnimeInfo(animeId: string): Promise <AnimeData | {}> {
+export async function getAnimeInfo(animeId: Required<string>): Promise<AnimeData | null> {
     try {
-        
+
         options.uri = 'https://www3.animeflv.net/anime/' + animeId;
 
         const animeData = (await cloudscraper(options)) as string;
@@ -95,6 +95,6 @@ export async function getAnimeInfo(animeId: string): Promise <AnimeData | {}> {
 
         return animeInfo;
     } catch {
-        return {};
+        return null
     }
 }
