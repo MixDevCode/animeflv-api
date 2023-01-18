@@ -1,6 +1,6 @@
 {
   "name": "animeflv-api-ts",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "description": "Un web-scrapper cuya función es obtener información del sitio conocido como AnimeFLV.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
