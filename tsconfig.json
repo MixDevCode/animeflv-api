@@ -7,6 +7,7 @@
       "module": "CommonJS",
       "types": ["mocha"],
       "noImplicitAny": true,
-      "outDir": "./dist"
+      "outDir": "./dist",
+      "declaration": true
     }
   }
