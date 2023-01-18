@@ -14,9 +14,9 @@ describe('SCRAPPER SELECTORS', function() {
         expect(search).to.be.a('Array');
     });
 
-    it('Si existe un error en getAnimeInfo, debe devolver un objeto vacío', async () => {
+    it('Si existe un error en getAnimeInfo, debe devolver null', async () => {
         var anime = await getAnimeInfo("one-piece");
-        expect(anime).to.eql({});
+        expect(anime).to.eql(null);
     });
 
     it('Si existe un error en searchAnime, debe devolver un arreglo vacío', async () => {
