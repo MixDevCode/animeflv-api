@@ -1,4 +1,4 @@
-AnimeFLV API [![Build Status](https://api.cirrus-ci.com/github/MixDevCode/animeflv-api.svg)](https://cirrus-ci.com/github/MixDevCode/animeflv-api)
+AnimeFLV API [![Build Status](https://api.cirrus-ci.com/github/MixDevCode/animeflv-api-ts.svg)](https://cirrus-ci.com/github/MixDevCode/animeflv-api-ts)
 ============
 
 Librería Node.js para obtener información del sitio `https://www3.animeflv.net/` utilizando el método de Web-Scraping.
@@ -6,7 +6,7 @@ Librería Node.js para obtener información del sitio `https://www3.animeflv.net
 Instalación
 ============
 ```sh
-npm install animeflv-api
+npm install animeflv-api-ts
 ```
 
 Uso
@@ -14,7 +14,7 @@ Uso
 Una vez el paquete está instalado, puedes importar la librería utilizando "require":
 
 ```js
-const animeflv = require('animeflv-api');
+const animeflv = require('animeflv-api-ts');
 ```
 ## Funciones
 #### searchAnime(params)
@@ -23,7 +23,7 @@ const animeflv = require('animeflv-api');
 |`query`|string|
 
 ```js
-const { searchAnime } = require('animeflv-api');
+const { searchAnime } = require('animeflv-api-ts');
 
 searchAnime("Overlord").then((result) => {
   console.log(result);
