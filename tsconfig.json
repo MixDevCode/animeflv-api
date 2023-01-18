@@ -1,13 +1,16 @@
 {
     "include": ["src/*.ts"],
     "compilerOptions": {
-      "target": "ESNext",
+      "target": "ES6",
       "module": "CommonJS",
       "moduleResolution": "Node",
       "types": ["mocha"],
       "noImplicitAny": true,
       "outDir": "./dist",
       "declaration": true,
-      "esModuleInterop": true
+      "esModuleInterop": true,
+      "watch": false,
+      "strict": true,
+      "skipLibCheck": true
     }
   }
