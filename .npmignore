@@ -2,4 +2,3 @@ node_modules
 package-lock.json
 tsconfig.json
 test
-.cirrus.yml

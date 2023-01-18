@@ -12,6 +12,7 @@ export interface SearchAnimeData {
     title: string
     cover: string
     synopsis: string
+    rating: string
     id: string
     type: string
     url: string
@@ -27,6 +28,20 @@ export interface AnimeData {
     synopsis: string
     genres: string[]
     episodes: number
+    url: string
+}
+
+export interface ChapterData {
+    title: string,
+    chapter: number,
+    cover: string,
+    url: string
+}
+
+export interface AnimeOnAirData {
+    title: string,
+    type: string,
+    id: string,
     url: string
 }
 
@@ -55,6 +70,7 @@ export async function searchAnime(query: string): Promise<SearchAnimeData[]> {
                     title: $(el).find('h3').text(),
                     cover: $(el).find('figure > img').attr('src')!,
                     synopsis: $(el).find('div.Description > p').eq(1).text(),
+                    rating: $(el).find('article > div > p:nth-child(2) > span.Vts.fa-star').text(),
                     id: $(el).find('a').attr('href')!.replace("/anime/", ""),
                     type: $(el).find('a > div > span.Type').text(),
                     url: 'https://www3.animeflv.net' + ($(el).find('a').attr('href') as string)
@@ -96,5 +112,93 @@ export async function getAnimeInfo(animeId: Required<string>): Promise<AnimeData
         return animeInfo;
     } catch {
         return null
+    }
+}
+
+export async function getLatest(): Promise<ChapterData[]> {
+    try {
+
+        options.uri = 'https://www3.animeflv.net/';
+
+        const chaptersData = (await cloudscraper(options)) as string;
+        const $ = load(chaptersData);
+
+        let chapters: ChapterData[] = []
+        if($('body > div.Wrapper > div > div > div > main > ul.ListEpisodios.AX.Rows.A06.C04.D03 > li').length > 0){
+            $('body > div.Wrapper > div > div > div > main > ul.ListEpisodios.AX.Rows.A06.C04.D03 > li').each((i, el) => {
+                let temp: ChapterData = {
+                    title: $(el).find('strong').text(),
+                    chapter: Number($(el).find('span.Capi').text().replace("Episodio ", "")),
+                    cover: 'https://animeflv.net' + ($(el).find('img').attr('src') as string),
+                    url: 'https://www3.animeflv.net' + $(el).find('a').attr('href') as string
+                }
+
+                chapters.push(temp);
+            });
+        }
+
+        return chapters;
+
+    } catch {
+        return [];
+    }
+}
+
+export async function getOnAir(): Promise<AnimeOnAirData[]> {
+    try {
+
+        options.uri = 'https://www3.animeflv.net/';
+
+        const onAirData = (await cloudscraper(options)) as string;
+        const $ = load(onAirData);
+
+        let onAir: AnimeOnAirData[] = []
+        if($('.ListSdbr > li').length > 0){
+            $('.ListSdbr > li').each((i, el) => {
+                let temp: AnimeOnAirData = {
+                    title: $(el).find('a').remove('span').text(),
+                    type: $(el).find('a').children('span').text(),
+                    id: $(el).find('a').attr('href')!.replace("/anime/", ""),
+                    url: 'https://www3.animeflv.net' + $(el).find('a').attr('href') as string
+                }
+
+                onAir.push(temp);
+            });
+        }
+        
+        return onAir;
+        
+    } catch {
+        return [];
+    }
+}
+
+export async function getComing(): Promise<SearchAnimeData[]> {
+    try {
+
+        options.uri = 'https://www3.animeflv.net/browse?status%5B%5D=3&order=default';
+
+        const comingData = (await cloudscraper(options)) as string;
+        const $ = load(comingData);
+
+        let coming: SearchAnimeData[] = []
+        if ($('body > div.Wrapper > div > div > main > ul > li').length > 0) {
+            $('body > div.Wrapper > div > div > main > ul > li').each((i, el) => {
+                let temp: SearchAnimeData = {
+                    title: $(el).find('h3').text(),
+                    cover: $(el).find('figure > img').attr('src')!,
+                    synopsis: $(el).find('div.Description > p').eq(1).text(),
+                    rating: $(el).find('article > div > p:nth-child(2) > span.Vts.fa-star').text(),
+                    id: $(el).find('a').attr('href')!.replace("/anime/", ""),
+                    type: $(el).find('a > div > span.Type').text(),
+                    url: 'https://www3.animeflv.net' + ($(el).find('a').attr('href') as string)
+                }
+
+                coming.push(temp);
+            });
+        };
+        return coming;
+    } catch {
+        return [];
     }
 }
