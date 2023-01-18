@@ -11,7 +11,6 @@
       "outDir": "./dist",
       "declaration": true,
       "esModuleInterop": true,
-      "watch": false,
       "strict": true,
       "skipLibCheck": true
     }
