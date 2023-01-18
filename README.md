@@ -16,6 +16,13 @@ Una vez el paquete está instalado, puedes importar la librería utilizando "req
 ```js
 const animeflv = require('animeflv-api-ts');
 ```
+
+o utilizando "import":
+
+```js
+import * as animeflv from 'animeflv-api-ts';
+```
+
 ## Funciones
 #### searchAnime(params)
 |Params|Type|
@@ -115,3 +122,11 @@ getAnimeInfo("one-piece-tv").then((result) => {
   url: 'https://www3.animeflv.net/anime/one-piece-tv'
 }
 ```
+
+## TODO
+ - [x] Convertir el módulo a TS
+ - [ ] Agregar una función para obtener los últimos capítulos subidos
+ - [ ] Agregar una función para obtener los animes en emisión
+
+## Contribuyentes
+ - [ShompiFlen](https://github.com/Shompi) :star:
