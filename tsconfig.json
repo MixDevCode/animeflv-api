@@ -1,7 +1,5 @@
 {
-    "files": [
-      "src/index.ts"
-    ],
+    "include": ["src/*.ts"],
     "compilerOptions": {
       "target": "ES6",
       "module": "CommonJS",
@@ -11,6 +9,7 @@
       "outDir": "./dist",
       "declaration": true,
       "esModuleInterop": true,
+      "watch": false,
       "strict": true,
       "skipLibCheck": true
     }
