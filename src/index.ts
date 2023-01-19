@@ -1,18 +1,20 @@
 /**
-        This script was made by
-        @MixDevCode
-        and Typed by
-        @Shompi
+                This script was made by
+                @MixDevCode
+                and Typed by
+                @Shompi
  */
 
 import cloudscraper from 'cloudscraper';
 import { load } from 'cheerio';
+import { AnimeGenres } from "./constants"
 
 /** Puede que hayan status faltantes */
-export type AnimeStatus = "En emision" | "Finalizado"
+export type AnimeStatus = string | "En emision" | "Finalizado" | "Proximamente";
 /** Puede que hayan tipos faltantes */
-export type AnimeType = "OVA" | "Anime" | "Película" | "Especial"
-export type AnimeGenre = "Acción" | "Artes Marciales" | "Aventuras" | "Carreras" | "Ciencia Ficción" | "Comedia" | "Demencia" | "Demonios" | "Deportes" | "Drama" | "Ecchi" | "Escolares" | "Espacial" | "Fantasía" | "Harem" | "Histórico" | "Infantil" | "Josei" | "Juegos" | "Magia" | "Mecha" | "Militar" | "Misterio" | "Música" | "Parodia" | "Policía" | "Psicológico" | "Recuentos de la vida" | "Romance" | "Samurai" | "Seinen" | "Shoujo" | "Shounen" | "Sobrenatural" | "Superpoderes" | "Suspenso" | "Terror" | "Vampiros" | "Yaoi" | "Yuri"
+export type AnimeType = string | "OVA" | "Anime" | "Película" | "Especial";
+
+export type AnimeGenre = typeof AnimeGenres[number];
 
 export interface SearchAnimeData {
     title: string
@@ -211,6 +213,8 @@ export async function getComing(): Promise<SearchAnimeData[]> {
 }
 
 export async function searchAnimeByGenres(genres: AnimeGenre[]): Promise<SearchAnimeData[] | null> {
+
+    const genresFiltered = genres.filter(genre => AnimeGenres.includes(genre))
 
     /** TODO haz lo tuyo Mix*/
     return null
