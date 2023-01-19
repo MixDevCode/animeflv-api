@@ -1,8 +1,8 @@
 /**
-                This script was made by
-                @MixDevCode
-                and Typed by
-                @Shompi
+                                This script was made by
+                                @MixDevCode
+                                and Typed by
+                                @Shompi
  */
 
 import cloudscraper from 'cloudscraper';
@@ -215,6 +215,8 @@ export async function getComing(): Promise<SearchAnimeData[]> {
 export async function searchAnimeByGenres(genres: AnimeGenre[]): Promise<SearchAnimeData[] | null> {
 
     const genresFiltered = genres.filter(genre => AnimeGenres.includes(genre))
+
+    /** !Notese que al momento de meter los generos a la url, estos deben ir en minúsculas */
 
     /** TODO haz lo tuyo Mix*/
     return null
