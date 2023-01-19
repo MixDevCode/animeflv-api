@@ -1,8 +1,8 @@
 /**
-    This script was made by
-    @MixDevCode
-    and Typed by
-    @Shompi
+        This script was made by
+        @MixDevCode
+        and Typed by
+        @Shompi
  */
 
 import cloudscraper from 'cloudscraper';
@@ -11,7 +11,8 @@ import { load } from 'cheerio';
 /** Puede que hayan status faltantes */
 export type AnimeStatus = "En emision" | "Finalizado"
 /** Puede que hayan tipos faltantes */
-export type AnimeType = "OVA" | "Anime" | "Película"
+export type AnimeType = "OVA" | "Anime" | "Película" | "Especial"
+export type AnimeGenre = "Acción" | "Artes Marciales" | "Aventuras" | "Carreras" | "Ciencia Ficción" | "Comedia" | "Demencia" | "Demonios" | "Deportes" | "Drama" | "Ecchi" | "Escolares" | "Espacial" | "Fantasía" | "Harem" | "Histórico" | "Infantil" | "Josei" | "Juegos" | "Magia" | "Mecha" | "Militar" | "Misterio" | "Música" | "Parodia" | "Policía" | "Psicológico" | "Recuentos de la vida" | "Romance" | "Samurai" | "Seinen" | "Shoujo" | "Shounen" | "Sobrenatural" | "Superpoderes" | "Suspenso" | "Terror" | "Vampiros" | "Yaoi" | "Yuri"
 
 export interface SearchAnimeData {
     title: string
@@ -31,7 +32,7 @@ export interface AnimeData {
     type: AnimeType
     cover: string
     synopsis: string
-    genres: string[]
+    genres: AnimeGenre[]
     episodes: number
     url: string
 }
@@ -107,7 +108,7 @@ export async function getAnimeInfo(animeId: string): Promise<AnimeData | null> {
             type: $('body > div.Wrapper > div > div > div.Ficha.fchlt > div.Container > span').text() as AnimeType,
             cover: 'https://animeflv.net' + ($('body > div.Wrapper > div > div > div.Container > div > aside > div.AnimeCover > div > figure > img').attr('src') as string),
             synopsis: $('body > div.Wrapper > div > div > div.Container > div > main > section:nth-child(1) > div.Description > p').text(),
-            genres: $('body > div.Wrapper > div > div > div.Container > div > main > section:nth-child(1) > nav > a').text().split(/(?=[A-Z])/),
+            genres: $('body > div.Wrapper > div > div > div.Container > div > main > section:nth-child(1) > nav > a').text().split(/(?=[A-Z])/) as AnimeGenre[],
             episodes: JSON.parse($('script').eq(15).text().match(/episodes = (\[\[.*\].*])/)?.[1] as string).length ?? 0,
             url: options.uri
         };
@@ -207,4 +208,10 @@ export async function getComing(): Promise<SearchAnimeData[]> {
     } catch {
         return [];
     }
+}
+
+export async function searchAnimeByGenres(genres: AnimeGenre[]): Promise<SearchAnimeData[] | null> {
+
+    /** TODO haz lo tuyo Mix*/
+    return null
 }
