@@ -249,9 +249,6 @@ function generateRequestUrl(options?: FilterOptions): string {
         return cadena.split('').map(letra => acentos[letra] || letra).join('').toString();
     }
 
-    /** String que deberia devolver
-        https://www3.animeflv.net/browse?genre[]=artes-marciales&genre[]=militar&type[]=movie&type[]=special&status[]=1&status[]=2&status[]=3&order=default
-    */
     if (!options) return "https://www3.animeflv.net/browse?order=default"
 
     const FinalUrl = new URL("https://www3.animeflv.net/browse")
