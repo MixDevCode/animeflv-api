@@ -1,18 +1,18 @@
 /**
-                                This script was made by
-                                @MixDevCode
-                                and Typed by
-                                @Shompi
+                                                                This script was made by
+                                                                @MixDevCode
+                                                                and Typed by
+                                                                @Shompi
  */
 
 import cloudscraper from 'cloudscraper';
 import { load } from 'cheerio';
-import { AnimeGenres } from "./constants"
+import { AnimeGenres, AnimeType, AnimeStatus } from "./constants"
 
 /** Puede que hayan status faltantes */
-export type AnimeStatus = string | "En emision" | "Finalizado" | "Proximamente";
+export type AnimeStatus = typeof AnimeStatus[number];
 /** Puede que hayan tipos faltantes */
-export type AnimeType = string | "OVA" | "Anime" | "Película" | "Especial";
+export type AnimeType = typeof AnimeType[number];
 
 export type AnimeGenre = typeof AnimeGenres[number];
 
@@ -212,12 +212,102 @@ export async function getComing(): Promise<SearchAnimeData[]> {
     }
 }
 
-export async function searchAnimeByGenres(genres: AnimeGenre[]): Promise<SearchAnimeData[] | null> {
+const FilterOrder = {
+    "Por Defecto": "default",
+    "Recientemente Actualizados": "recent",
+    "Recientemente Agregados": "added",
+    "Nombre A-Z": "title",
+    "Calificacion": "rating"
+}
 
-    const genresFiltered = genres.filter(genre => AnimeGenres.includes(genre))
+const AnimeTypeEnum = {
+    "Anime": "tv",
+    "Película": "movie",
+    "Especial": "special",
+    "OVA": "ova"
+}
 
-    /** !Notese que al momento de meter los generos a la url, estos deben ir en minúsculas */
+const AnimeStatusEnum = {
+    "En emision": 1,
+    "Finalizado": 2,
+    "Proximamente": 3,
+}
+
+interface FilterOptions {
+    genres?: AnimeGenre[]
+    types?: AnimeType[]
+    status?: (keyof typeof AnimeStatusEnum)[]
+    order?: keyof typeof FilterOrder
+}
+
+
+
+function generateRequestUrl(options?: FilterOptions): string {
+    const quitarAcentos = (cadena: string) => {
+        const acentos = { 'á': 'a', 'é': 'e', 'í': 'i', 'ó': 'o', 'ú': 'u', 'Á': 'A', 'É': 'E', 'Í': 'I', 'Ó': 'O', 'Ú': 'U' };
+        //@ts-ignore
+        return cadena.split('').map(letra => acentos[letra] || letra).join('').toString();
+    }
+
+    /** String que deberia devolver
+        https://www3.animeflv.net/browse?genre[]=artes-marciales&genre[]=militar&type[]=movie&type[]=special&status[]=1&status[]=2&status[]=3&order=default
+    */
+    if (!options) return "https://www3.animeflv.net/browse?order=default"
+
+    const FinalUrl = new URL("https://www3.animeflv.net/browse")
+
+    let filteredGenres: string[] | string = ""
+    let parsedStatuses: string[] | string = ""
+    let parsedTypes: string[] | string = ""
+    let filterOrder: string = "default"
+
+    const genrePrefix = "genre[]"
+    const typePrefix = "type[]"
+    const statusPrefix = "status[]"
+    const orderPrefix = "order"
+
+    if (options.genres && Array.isArray(options.genres)) {
+        filteredGenres = options.genres.filter(genre => AnimeGenres.includes(genre))
+
+        for (const genre of filteredGenres) {
+            const normalizedGenre = quitarAcentos(genre).replace(/\s+/g, "-").toLowerCase()
+
+            FinalUrl.searchParams.append(genrePrefix, normalizedGenre)
+        }
+    }
+
+    if (options.status && Array.isArray(options.status)) {
+        parsedStatuses = options.status.filter(status => status in AnimeStatusEnum)
+
+        for (const status of parsedStatuses) {
+            FinalUrl.searchParams.append(statusPrefix, AnimeStatusEnum[status as AnimeStatus].toString())
+        }
+    }
+
+    if (options.types && Array.isArray(options.types)) {
+        parsedTypes = options.types.filter(type => type in AnimeTypeEnum)
+
+        for (const type of parsedTypes) {
+            FinalUrl.searchParams.append(typePrefix, AnimeTypeEnum[type as AnimeType])
+        }
+    }
+
+    if (options.order && (options.order in FilterOrder)) {
+        FinalUrl.searchParams.append(orderPrefix, FilterOrder[options.order])
+    } else {
+        FinalUrl.searchParams.append(orderPrefix, FilterOrder["Por Defecto"])
+    }
+
+    return FinalUrl.toString()
+}
+
+export async function searchAnimesByFilter(options?: FilterOptions): Promise<SearchAnimeData[] | null> {
+
+    /** La url del request con los filtros ya puestos */
+    const formatedUrl = generateRequestUrl(options)
 
     /** TODO haz lo tuyo Mix*/
+    /** ... */
+
     return null
 }
