@@ -26,6 +26,13 @@ export interface SearchAnimeData {
     url: string
 }
 
+export interface AnimeFilterResults {
+    previousPage: string | null
+    nextPage: string | null
+    foundPages: number
+    data: SearchAnimeData[]
+}
+
 export interface AnimeData {
     title: string
     alternative_titles: string[]
@@ -298,13 +305,93 @@ function generateRequestUrl(options?: FilterOptions): string {
     return FinalUrl.toString()
 }
 
-export async function searchAnimesByFilter(options?: FilterOptions): Promise<SearchAnimeData[] | null> {
+export async function searchAnimesByFilter(opts?: FilterOptions): Promise<AnimeFilterResults | null> {
+    try {
+        /** La url del request con los filtros ya puestos */
+        const formatedUrl = generateRequestUrl(opts)
 
-    /** La url del request con los filtros ya puestos */
-    const formatedUrl = generateRequestUrl(options)
+        options.uri = formatedUrl;
+        
+        const filterData = (await cloudscraper(options)) as string;
+        const $ = load(filterData);
 
-    /** TODO haz lo tuyo Mix*/
-    /** ... */
+        let filter: AnimeFilterResults = {
+            previousPage: null,
+            nextPage: null,
+            foundPages: 0,
+            data: []
+        }
+        if ($('body > div.Wrapper > div > div > main > ul > li').length > 0) {
+            $('body > div.Wrapper > div > div > main > ul > li').each((i, el) => {
+                let temp: SearchAnimeData = {
+                    title: $(el).find('h3').text(),
+                    cover: $(el).find('figure > img').attr('src')!,
+                    synopsis: $(el).find('div.Description > p').eq(1).text(),
+                    rating: $(el).find('article > div > p:nth-child(2) > span.Vts.fa-star').text(),
+                    id: $(el).find('a').attr('href')!.replace("/anime/", ""),
+                    type: $(el).find('a > div > span.Type').text() as AnimeType,
+                    url: 'https://www3.animeflv.net' + ($(el).find('a').attr('href') as string),
+                }
 
-    return null
+                filter.data.push(temp);
+            });
+
+            if($('body > div.Wrapper > div > div > main > div > ul > li').eq(0).children('a').attr('href') as string == "#") filter.previousPage = null;
+            else filter.previousPage = 'https://www3.animeflv.net' + ($('body > div.Wrapper > div > div > main > div > ul > li').eq(0).children('a').attr('href') as string);
+
+            if ($('body > div.Wrapper > div > div > main > div > ul > li').last().children('a').attr('href') as string == "#") filter.nextPage = null;
+            else filter.nextPage = 'https://www3.animeflv.net' + ($('body > div.Wrapper > div > div > main > div > ul > li').last().children('a').attr('href') as string);
+
+            filter.foundPages = Number($('body > div.Wrapper > div > div > main > div > ul > li').last().prev().find('a').text());
+
+        };
+        return filter;
+
+    } catch {
+        return null;
+    }
+}
+
+export async function searchAnimesBySpecificURL(url: string): Promise<AnimeFilterResults | null> {
+    try {
+        options.uri = url;
+
+        const specificData = (await cloudscraper(options)) as string;
+        const $ = load(specificData);
+
+        let specific: AnimeFilterResults = {
+            previousPage: null,
+            nextPage: null,
+            foundPages: 0,
+            data: []
+        }
+        if ($('body > div.Wrapper > div > div > main > ul > li').length > 0) {
+            $('body > div.Wrapper > div > div > main > ul > li').each((i, el) => {
+                let temp: SearchAnimeData = {
+                    title: $(el).find('h3').text(),
+                    cover: $(el).find('figure > img').attr('src')!,
+                    synopsis: $(el).find('div.Description > p').eq(1).text(),
+                    rating: $(el).find('article > div > p:nth-child(2) > span.Vts.fa-star').text(),
+                    id: $(el).find('a').attr('href')!.replace("/anime/", ""),
+                    type: $(el).find('a > div > span.Type').text() as AnimeType,
+                    url: 'https://www3.animeflv.net' + ($(el).find('a').attr('href') as string),
+                }
+
+                specific.data.push(temp);
+            });
+
+            if($('body > div.Wrapper > div > div > main > div > ul > li').eq(0).children('a').attr('href') as string == "#") specific.previousPage = null;
+            else specific.previousPage = 'https://www3.animeflv.net' + ($('body > div.Wrapper > div > div > main > div > ul > li').eq(0).children('a').attr('href') as string);
+
+            if ($('body > div.Wrapper > div > div > main > div > ul > li').last().children('a').attr('href') as string == "#") specific.nextPage = null;
+            else specific.nextPage = 'https://www3.animeflv.net' + ($('body > div.Wrapper > div > div > main > div > ul > li').last().children('a').attr('href') as string);
+
+            specific.foundPages = Number($('body > div.Wrapper > div > div > main > div > ul > li').last().prev().find('a').text());
+
+        };
+        return specific;
+
+    } catch {
+        return null;
+    }
 }
