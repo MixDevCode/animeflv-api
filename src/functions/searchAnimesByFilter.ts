@@ -81,10 +81,10 @@ export async function searchAnimesByFilter(opts?: FilterOptions): Promise<AnimeF
 
         const pageSelector = $('body > div.Wrapper > div > div > main > div > ul > li');
 
-        if (pageSelector.eq(0).children('a').attr('href') as string == "#") filter.previousPage = null;
+        if (pageSelector.eq(0).children('a').attr('href') as string === "#") filter.previousPage = null;
         else filter.previousPage = 'https://www3.animeflv.net' + (pageSelector.eq(0).children('a').attr('href') as string);
 
-        if (pageSelector.last().children('a').attr('href') as string == "#") filter.nextPage = null;
+        if (pageSelector.last().children('a').attr('href') as string === "#") filter.nextPage = null;
         else filter.nextPage = 'https://www3.animeflv.net' + (pageSelector.last().children('a').attr('href') as string);
 
         filter.foundPages = Number(pageSelector.last().prev().find('a').text());
