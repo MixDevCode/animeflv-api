@@ -1,0 +1,1 @@
+export { scrapSearchAnimeData } from "./scrapAnimeData";

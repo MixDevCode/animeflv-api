@@ -1,16 +1,17 @@
 {
-    "include": ["src/*.ts"],
-    "compilerOptions": {
-      "target": "ES2021",
-      "module": "CommonJS",
-      "moduleResolution": "Node",
-      "types": ["mocha"],
-      "noImplicitAny": true,
-      "outDir": "./dist",
-      "declaration": true,
-      "esModuleInterop": true,
-      "watch": false,
-      "strict": true,
-      "skipLibCheck": true
-    }
+  "include": ["src/**/*.ts", "src/*.d.ts"],
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "CommonJS",
+    "moduleResolution": "Node",
+    "types": ["mocha"],
+    "noImplicitAny": true,
+    "outDir": "./dist",
+    "declaration": true,
+    "esModuleInterop": true,
+    "watch": false,
+    "strict": true,
+    "skipLibCheck": true,
+    "typeRoots": ["./src/types"]
   }
+}
