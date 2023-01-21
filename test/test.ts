@@ -5,27 +5,27 @@ import { getAnimeInfo, searchAnime } from '../src/index';
 
 describe('SCRAPPER SELECTORS', function() {
     it('La función getAnimeInfo debe devolver un objeto', async () => {
-        var anime = await getAnimeInfo("one-piece-tv");
+        const anime = await getAnimeInfo("one-piece-tv");
         expect(anime).to.be.a('Object');
     });
     
     it('La función searchAnime debe devolver un arreglo', async () => {
-        var search = await searchAnime("One Piece");
+        const search = await searchAnime("One Piece");
         expect(search).to.be.a('Array');
     });
 
     it('Si existe un error en getAnimeInfo, debe devolver null', async () => {
-        var anime = await getAnimeInfo("one-piece");
+        const anime = await getAnimeInfo("one-piece");
         expect(anime).to.eql(null);
     });
 
     it('Si existe un error en searchAnime, debe devolver un arreglo vacío', async () => {
-        var search = await searchAnime("ぼっち・ざ・ろっ");
+        const search = await searchAnime("ぼっち・ざ・ろっ");
         expect(search).to.eql([]);
     });
 
     it('getAnimeInfo("sword-art-online") debe devolver información acerca del anime "Sword Art Online"', async () => {
-        var anime = await getAnimeInfo("sword-art-online");
+        const anime = await getAnimeInfo("sword-art-online");
         expect(anime).to.eql({
             title: 'Sword Art Online',
             alternative_titles: [ 'ソードアート・オンライン' ],
@@ -43,7 +43,7 @@ describe('SCRAPPER SELECTORS', function() {
     });
 
     it('searchAnime("High School of The Dead") debe devolver un array con DOS objetos', async () => {
-        var search = await searchAnime("High School of The Dead");
+        const search = await searchAnime("High School of The Dead");
         expect(search).to.eql([
             {
               title: 'Highschool of the Dead',

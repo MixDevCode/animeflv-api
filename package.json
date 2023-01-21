@@ -3,7 +3,7 @@
   "version": "0.3.0",
   "description": "Un web-scrapper cuya función es obtener información del sitio conocido como AnimeFLV.",
   "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/types/index.d.ts",
   "scripts": {
     "start": "node dist/index.js",
     "test": "mocha -r ts-node/register ./test/test.ts",
