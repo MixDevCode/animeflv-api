@@ -5,16 +5,16 @@ import type { SearchAnimeData } from "../types";
 import { scrapSearchAnimeData } from "../utils";
 
 export async function getComing(): Promise<SearchAnimeData[]> {
-	try {
+    try {
 
-		CloudscraperOptions.uri = 'https://www3.animeflv.net/browse?status%5B%5D=3&order=default';
+        CloudscraperOptions.uri = 'https://www3.animeflv.net/browse?status%5B%5D=3&order=default';
 
-		const comingData = (await cloudscraper(CloudscraperOptions)) as string;
-		const $ = load(comingData);
+        const comingData = (await cloudscraper(CloudscraperOptions)) as string;
+        const $ = load(comingData);
 
-		return scrapSearchAnimeData($);
+        return scrapSearchAnimeData($);
 
-	} catch {
-		return [];
-	}
+    } catch {
+        return [];
+    }
 }

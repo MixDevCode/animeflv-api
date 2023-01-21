@@ -9,51 +9,51 @@ export type AnimeGenre = typeof AnimeGenres[number];
 export type FilterOrder = keyof typeof FilterOrderEnum;
 
 export interface SearchAnimeData {
-	title: string
-	cover: string
-	synopsis: string
-	rating: string
-	id: string
-	type: AnimeType
-	url: string
+    title: string
+    cover: string
+    synopsis: string
+    rating: string
+    id: string
+    type: AnimeType
+    url: string
 }
 
 export interface AnimeFilterResults {
-	previousPage: string | null
-	nextPage: string | null
-	foundPages: number
-	data: SearchAnimeData[]
+    previousPage: string | null
+    nextPage: string | null
+    foundPages: number
+    data: SearchAnimeData[]
 }
 
 export interface AnimeData {
-	title: string
-	alternative_titles: string[]
-	status: AnimeStatus
-	rating: string
-	type: AnimeType
-	cover: string
-	synopsis: string
-	genres: AnimeGenre[]
-	episodes: number
-	url: string
+    title: string
+    alternative_titles: string[]
+    status: AnimeStatus
+    rating: string
+    type: AnimeType
+    cover: string
+    synopsis: string
+    genres: AnimeGenre[]
+    episodes: number
+    url: string
 }
 
 export interface ChapterData {
-	title: string
-	chapter: number
-	cover: string
-	url: string
+    title: string
+    chapter: number
+    cover: string
+    url: string
 }
 
 export interface AnimeOnAirData {
-	title: string
-	type: AnimeType
-	id: string
-	url: string
+    title: string
+    type: AnimeType
+    id: string
+    url: string
 }
 export interface FilterOptions {
-	genres?: AnimeGenre[]
-	types?: AnimeType[]
-	statuses?: AnimeStatus[]
-	order?: FilterOrder
+    genres?: AnimeGenre[]
+    types?: AnimeType[]
+    statuses?: AnimeStatus[]
+    order?: FilterOrder
 }

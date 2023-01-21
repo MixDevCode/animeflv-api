@@ -5,15 +5,15 @@ import { load } from "cheerio";
 import { SearchAnimeData } from "../types";
 
 export async function searchAnime(query: string): Promise<SearchAnimeData[]> {
-	try {
+    try {
 
-		CloudscraperOptions.uri = 'https://www3.animeflv.net/browse?q=' + query.toLowerCase().replace(/\s+/g, "+");
+        CloudscraperOptions.uri = 'https://www3.animeflv.net/browse?q=' + query.toLowerCase().replace(/\s+/g, "+");
 
-		const searchData = (await cloudscraper(CloudscraperOptions)) as string;
-		const $ = load(searchData);
+        const searchData = (await cloudscraper(CloudscraperOptions)) as string;
+        const $ = load(searchData);
 
-		return scrapSearchAnimeData($);
-	} catch {
-		return [];
-	}
+        return scrapSearchAnimeData($);
+    } catch {
+        return [];
+    }
 }
