@@ -25,6 +25,9 @@ import * as animeflv from 'animeflv-api-ts';
 ```
 
 ## Funciones
+
+> **Note** Si quieres saber más acerca de los tipos, constantes y funciones puedes visitar la [Wiki](https://github.com/MixDevCode/animeflv-api-ts/wiki), aquí solo se listarán ejemplos de uso.
+
 #### searchAnime(params)
 |Params|Type|
 |-|-|
@@ -243,7 +246,7 @@ Disclaimer
 ============
 El uso de animeflv-api-ts es exclusivamente para fines educativos y de investigación. No nos hacemos responsables del uso indebido o ilegal de la misma, incluyendo pero no limitando a la recolección de datos sin el consentimiento del propietario del sitio web, violación de los términos de uso del sitio, o cualquier otra actividad ilegal. Es responsabilidad del usuario final cumplir con todas las leyes y regulaciones aplicables en su jurisdicción antes de utilizar la librería.
 
-Además, al utilizar la animeflv-api-ts, el usuario acepta que es consciente de las posibles consecuencias legales o técnicas que puedan surgir de su uso. Estas consecuencias incluyen, pero no se limitan a, el bloqueo de su dirección IP por parte del sitio web, la violación de los términos de uso del sitio, y cualquier otra acción tomada por el propietario del sitio web para proteger su contenido.
+Además, al utilizar esta librería, el usuario acepta que es consciente de las posibles consecuencias legales o técnicas que puedan surgir de su uso. Estas consecuencias incluyen, pero no se limitan a, el bloqueo de su dirección IP por parte del sitio web, la violación de los términos de uso del sitio, y cualquier otra acción tomada por el propietario del sitio web para proteger su contenido.
 
 Si eres el propietario del sitio web y deseas que cesemos el desarrollo de animeflv-api-ts, te invitamos a contactarnos a través de <a href="mailto:soporte@mixdev.online?Subject=Propiedad%20de%20AnimeFLV">soporte@mixdev.online</a>. Haremos todo lo posible para cumplir con tu solicitud de manera rápida y eficiente.
 
