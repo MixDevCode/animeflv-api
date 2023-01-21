@@ -1,38 +1,8 @@
 import { load } from "cheerio"
 import cloudscraper from "cloudscraper"
-import { AnimeGenres, CloudscraperOptions } from "../constants"
-import { AnimeFilterResults, AnimeGenre, AnimeStatus, AnimeType } from "../types"
+import { AnimeGenres, AnimeStatusEnum, AnimeTypeEnum, CloudscraperOptions, FilterOrderEnum } from "../constants"
+import { AnimeFilterResults, AnimeStatus, AnimeType, FilterOptions } from "../types"
 import { scrapSearchAnimeData } from "../utils/scrapAnimeData"
-
-const FilterOrder = {
-	"Por Defecto": "default",
-	"Recientemente Actualizados": "recent",
-	"Recientemente Agregados": "added",
-	"Nombre A-Z": "title",
-	"Calificacion": "rating"
-}
-
-const AnimeTypeEnum = {
-	"Anime": "tv",
-	"Película": "movie",
-	"Especial": "special",
-	"OVA": "ova"
-}
-
-const AnimeStatusEnum = {
-	"En emision": 1,
-	"Finalizado": 2,
-	"Proximamente": 3,
-}
-
-interface FilterOptions {
-	genres?: AnimeGenre[]
-	types?: AnimeType[]
-	status?: (keyof typeof AnimeStatusEnum)[]
-	order?: keyof typeof FilterOrder
-}
-
-
 
 function generateRequestUrl(options?: FilterOptions): string {
 	const quitarAcentos = (cadena: string) => {
@@ -65,8 +35,8 @@ function generateRequestUrl(options?: FilterOptions): string {
 		}
 	}
 
-	if (options.status && Array.isArray(options.status)) {
-		parsedStatuses = options.status.filter(status => status in AnimeStatusEnum)
+	if (options.statuses && Array.isArray(options.statuses)) {
+		parsedStatuses = options.statuses.filter(status => status in AnimeStatusEnum)
 
 		for (const status of parsedStatuses) {
 			FinalUrl.searchParams.append(statusPrefix, AnimeStatusEnum[status as AnimeStatus].toString())
@@ -81,10 +51,10 @@ function generateRequestUrl(options?: FilterOptions): string {
 		}
 	}
 
-	if (options.order && (options.order in FilterOrder)) {
-		FinalUrl.searchParams.append(orderPrefix, FilterOrder[options.order])
+	if (options.order && (options.order in FilterOrderEnum)) {
+		FinalUrl.searchParams.append(orderPrefix, FilterOrderEnum[options.order])
 	} else {
-		FinalUrl.searchParams.append(orderPrefix, FilterOrder["Por Defecto"])
+		FinalUrl.searchParams.append(orderPrefix, FilterOrderEnum["Por Defecto"])
 	}
 
 	return FinalUrl.toString()

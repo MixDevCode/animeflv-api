@@ -1,13 +1,13 @@
 {
   "include": ["src/**/*.ts", "src/*.d.ts"],
   "compilerOptions": {
-    "target": "ES2021",
+    "target": "ESNext",
     "module": "CommonJS",
     "moduleResolution": "Node",
     "types": ["mocha"],
     "noImplicitAny": true,
     "outDir": "./dist",
-    "declaration": false,
+    "declaration": true,
     "esModuleInterop": true,
     "watch": false,
     "strict": true,
