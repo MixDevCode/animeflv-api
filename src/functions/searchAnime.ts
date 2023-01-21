@@ -1,6 +1,6 @@
 import cloudscraper from "cloudscraper";
 import { CloudscraperOptions } from "../constants";
-import { scrapSearchAnimeData } from "../utils/scrapAnimeData";
+import { scrapSearchAnimeData } from "../utils";
 import { load } from "cheerio";
 import { SearchAnimeData } from "../types";
 

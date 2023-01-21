@@ -2,7 +2,7 @@ import { load } from "cheerio"
 import cloudscraper from "cloudscraper"
 import { AnimeGenres, AnimeStatusEnum, AnimeTypeEnum, CloudscraperOptions, FilterOrderEnum } from "../constants"
 import { AnimeFilterResults, AnimeStatus, AnimeType, FilterOptions } from "../types"
-import { scrapSearchAnimeData } from "../utils/scrapAnimeData"
+import { scrapSearchAnimeData } from "../utils"
 
 function generateRequestUrl(options?: FilterOptions): string {
 	const quitarAcentos = (cadena: string) => {
