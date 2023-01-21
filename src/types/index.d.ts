@@ -1,13 +1,13 @@
 import { AnimeGenres, AnimeStatus, AnimeType } from "../constants";
 
 /** Puede que hayan status faltantes */
-export type AnimeStatus = typeof AnimeStatus[number];
+type AnimeStatus = typeof AnimeStatus[number];
 /** Puede que hayan tipos faltantes */
-export type AnimeType = typeof AnimeType[number];
+type AnimeType = typeof AnimeType[number];
 
-export type AnimeGenre = typeof AnimeGenres[number];
+type AnimeGenre = typeof AnimeGenres[number];
 
-export interface SearchAnimeData {
+interface SearchAnimeData {
 	title: string
 	cover: string
 	synopsis: string
@@ -17,14 +17,14 @@ export interface SearchAnimeData {
 	url: string
 }
 
-export interface AnimeFilterResults {
+interface AnimeFilterResults {
 	previousPage: string | null
 	nextPage: string | null
 	foundPages: number
 	data: SearchAnimeData[]
 }
 
-export interface AnimeData {
+interface AnimeData {
 	title: string
 	alternative_titles: string[]
 	status: AnimeStatus
@@ -37,16 +37,18 @@ export interface AnimeData {
 	url: string
 }
 
-export interface ChapterData {
+interface ChapterData {
 	title: string
 	chapter: number
 	cover: string
 	url: string
 }
 
-export interface AnimeOnAirData {
+interface AnimeOnAirData {
 	title: string
 	type: AnimeType
 	id: string
 	url: string
 }
+
+declare function searchAnime(query: string): Promise<SearchAnimeData[] | null>

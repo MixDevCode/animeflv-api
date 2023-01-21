@@ -1,5 +1,5 @@
 {
-  "include": ["src/**/*.ts"],
+  "include": ["src/**/*.ts", "src/*.d.ts"],
   "compilerOptions": {
     "target": "ES2021",
     "module": "CommonJS",
@@ -7,7 +7,7 @@
     "types": ["mocha"],
     "noImplicitAny": true,
     "outDir": "./dist",
-    "declaration": true,
+    "declaration": false,
     "esModuleInterop": true,
     "watch": false,
     "strict": true,

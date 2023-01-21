@@ -1,7 +1,7 @@
 import { CloudscraperOptions } from "../constants";
-import type { AnimeData, AnimeGenre, AnimeStatus, AnimeType } from "../types";
 import { load } from "cheerio";
 import cloudscraper from "cloudscraper";
+import type { AnimeData, AnimeGenre, AnimeStatus, AnimeType } from "../types";
 
 export async function getAnimeInfo(animeId: string): Promise<AnimeData | null> {
 	try {

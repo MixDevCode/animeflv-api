@@ -1,7 +1,7 @@
 import { load } from "cheerio";
 import cloudscraper from "cloudscraper";
 import { CloudscraperOptions } from "../constants";
-import { AnimeFilterResults, AnimeType, SearchAnimeData } from "../types";
+import { AnimeFilterResults } from "../types";
 import { scrapSearchAnimeData } from "../utils/scrapAnimeData";
 
 export async function searchAnimesBySpecificURL(url: string): Promise<AnimeFilterResults | null> {
