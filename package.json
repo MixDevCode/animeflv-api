@@ -1,6 +1,6 @@
 {
-  "name": "animeflv-api-ts",
-  "version": "3.0.0",
+  "name": "animeflv-api",
+  "version": "1.0.2",
   "description": "Un web-scrapper cuya función es obtener información del sitio conocido como AnimeFLV.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -11,7 +11,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/MixDevCode/animeflv-api-ts.git"
+    "url": "https://github.com/MixDevCode/animeflv-api.git"
   },
   "keywords": [
     "scrapper",

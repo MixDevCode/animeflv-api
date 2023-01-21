@@ -1,13 +1,13 @@
-AnimeFLV SCRAPPER ![Licence](https://img.shields.io/npm/l/animeflv-api-ts) ![Version](https://img.shields.io/npm/v/animeflv-api-ts) ![Known Vulnerabilities](https://snyk.io/test/github/mixdevcode/animeflv-api-ts/badge.svg) ![Node Minimum Version](https://img.shields.io/badge/node-%3E%3D16.0.0-informational)
+AnimeFLV SCRAPPER ![Licence](https://img.shields.io/npm/l/animeflv-api) ![Version](https://img.shields.io/npm/v/animeflv-api) ![Known Vulnerabilities](https://snyk.io/test/github/mixdevcode/animeflv-api/badge.svg) ![Node Minimum Version](https://img.shields.io/badge/node-%3E%3D16.0.0-informational)
 ============
-[![NPM](https://nodei.co/npm/animeflv-api-ts.png)](https://nodei.co/npm/animeflv-api-ts/)
+[![NPM](https://nodei.co/npm/animeflv-api.png)](https://nodei.co/npm/animeflv-api/)
 
 Librería Node.js para obtener información del sitio `https://www3.animeflv.net/` utilizando el método de Web-Scraping.
 
 Instalación
 ============
 ```sh
-npm install animeflv-api-ts
+npm install animeflv-api
 ```
 
 Uso
@@ -15,18 +15,18 @@ Uso
 Una vez el paquete está instalado, puedes importar la librería utilizando "require":
 
 ```js
-const animeflv = require('animeflv-api-ts');
+const animeflv = require('animeflv-api');
 ```
 
 o utilizando "import":
 
 ```js
-import * as animeflv from 'animeflv-api-ts';
+import * as animeflv from 'animeflv-api';
 ```
 
 ## Funciones
 
-> **Note** Si quieres saber más acerca de los tipos, constantes y funciones puedes visitar la [Wiki](https://github.com/MixDevCode/animeflv-api-ts/wiki), aquí solo se listarán ejemplos de uso.
+> **Note** Si quieres saber más acerca de los tipos, constantes y funciones puedes visitar la [Wiki](https://github.com/MixDevCode/animeflv-api/wiki), aquí solo se listarán ejemplos de uso.
 
 #### searchAnime(params)
 |Params|Type|
@@ -34,7 +34,7 @@ import * as animeflv from 'animeflv-api-ts';
 |`query`|string|
 
 ```js
-import { searchAnime } from 'animeflv-api-ts';
+import { searchAnime } from 'animeflv-api';
 
 searchAnime("Overlord").then((result) => {
   console.log(result);
@@ -73,7 +73,7 @@ Un objeto JSON que contiene todos los animes encontrados utilizando el `query` e
 
 > **Note** el animeId es obtenido a través de la función `searchAnime` o removiendo `https://www3.animeflv.net/anime/` de la URL de un anime.
 ```js
-import { getAnimeInfo } from 'animeflv-api-ts';
+import { getAnimeInfo } from 'animeflv-api';
 
 getAnimeInfo("one-piece-tv").then((result) => {
   console.log(result);
@@ -110,7 +110,7 @@ Un objeto JSON que contiene la información del anime solicitado con el `animeId
 #### getLatest()
 
 ```js
-import { getLatest } from 'animeflv-api-ts';
+import { getLatest } from 'animeflv-api';
 
 getLatest().then((result) => {
   console.log(result);
@@ -136,7 +136,7 @@ Una lista JSON que contiene los últimos capítulos subidos al sitio web.
 #### getOnAir()
 
 ```js
-import { getOnAir } from 'animeflv-api-ts';
+import { getOnAir } from 'animeflv-api';
 
 getOnAir().then((result) => {
   console.log(result);
@@ -168,7 +168,7 @@ Una lista JSON con todos los animes en emisión del sitio.
 > **Note** Vease el ejemplo para entender el parámetro requerido por la función.
 
 ```js
-import { searchAnimesByFilter } from 'animeflv-api-ts';
+import { searchAnimesByFilter } from 'animeflv-api';
 
 searchAnimesByFilter({
     types: ["Anime"],
@@ -211,7 +211,7 @@ Un objeto JSON con los resultados encontrados de los filtros definidos.
 |`url`|string|
 
 ```js
-import { searchAnimesBySpecificURL } from 'animeflv-api-ts';
+import { searchAnimesBySpecificURL } from 'animeflv-api';
 
 searchAnimesBySpecificURL("https://www3.animeflv.net/browse?q=dragon+ball&page=2").then((result) => {
     console.log(result);
@@ -244,13 +244,13 @@ Un objeto JSON con los resultados encontrados de la `url` especificada.
 
 Disclaimer
 ============
-El uso de animeflv-api-ts es exclusivamente para fines educativos y de investigación. No nos hacemos responsables del uso indebido o ilegal de la misma, incluyendo pero no limitando a la recolección de datos sin el consentimiento del propietario del sitio web, violación de los términos de uso del sitio, o cualquier otra actividad ilegal. Es responsabilidad del usuario final cumplir con todas las leyes y regulaciones aplicables en su jurisdicción antes de utilizar la librería.
+El uso de animeflv-api es exclusivamente para fines educativos y de investigación. No nos hacemos responsables del uso indebido o ilegal de la misma, incluyendo pero no limitando a la recolección de datos sin el consentimiento del propietario del sitio web, violación de los términos de uso del sitio, o cualquier otra actividad ilegal. Es responsabilidad del usuario final cumplir con todas las leyes y regulaciones aplicables en su jurisdicción antes de utilizar la librería.
 
 Además, al utilizar esta librería, el usuario acepta que es consciente de las posibles consecuencias legales o técnicas que puedan surgir de su uso. Estas consecuencias incluyen, pero no se limitan a, el bloqueo de su dirección IP por parte del sitio web, la violación de los términos de uso del sitio, y cualquier otra acción tomada por el propietario del sitio web para proteger su contenido.
 
-Si eres el propietario del sitio web y deseas que cesemos el desarrollo de animeflv-api-ts, te invitamos a contactarnos a través de <a href="mailto:soporte@mixdev.online?Subject=Propiedad%20de%20AnimeFLV">soporte@mixdev.online</a>. Haremos todo lo posible para cumplir con tu solicitud de manera rápida y eficiente.
+Si eres el propietario del sitio web y deseas que cesemos el desarrollo de animeflv-api, te invitamos a contactarnos a través de <a href="mailto:soporte@mixdev.online?Subject=Propiedad%20de%20AnimeFLV">soporte@mixdev.online</a>. Haremos todo lo posible para cumplir con tu solicitud de manera rápida y eficiente.
 
-En resumen, el uso de animeflv-api-ts es bajo su propio riesgo.
+En resumen, el uso de animeflv-api es bajo su propio riesgo.
 
 ## TODO
  - [x] Convertir el módulo a TS
