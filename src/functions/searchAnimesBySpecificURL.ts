@@ -19,16 +19,17 @@ export async function searchAnimesBySpecificURL(url: string): Promise<AnimeFilte
         }
 
         specific.data = scrapSearchAnimeData($)
-
+        
         const pageSelector = $('body > div.Wrapper > div > div > main > div > ul > li')
 
-        if (pageSelector.eq(0).children('a').attr('href') === "#") specific.previousPage = null;
+        if(Number(pageSelector.last().prev().find('a').text()) === 0) specific.foundPages = 1;
+        else specific.foundPages = Number(pageSelector.last().prev().find('a').text());
+
+        if (pageSelector.eq(0).children('a').attr('href') === "#" || specific.foundPages == 1) specific.previousPage = null;
         else specific.previousPage = 'https://www3.animeflv.net' + pageSelector.eq(0).children('a').attr('href');
 
-        if (pageSelector.last().children('a').attr('href') === "#") specific.nextPage = null;
+        if (pageSelector.last().children('a').attr('href') === "#" || specific.foundPages == 1) specific.nextPage = null;
         else specific.nextPage = 'https://www3.animeflv.net' + pageSelector.last().children('a').attr('href');
-
-        specific.foundPages = Number(pageSelector.last().prev().find('a').text());
 
         return specific;
     }

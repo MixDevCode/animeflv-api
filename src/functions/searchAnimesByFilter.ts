@@ -18,7 +18,6 @@ function generateRequestUrl(options?: FilterOptions): string {
     let filteredGenres: string[] | string = ""
     let parsedStatuses: string[] | string = ""
     let parsedTypes: string[] | string = ""
-    let filterOrder: string = "default"
 
     const genrePrefix = "genre[]"
     const typePrefix = "type[]"
@@ -81,13 +80,14 @@ export async function searchAnimesByFilter(opts?: FilterOptions): Promise<AnimeF
 
         const pageSelector = $('body > div.Wrapper > div > div > main > div > ul > li');
 
-        if (pageSelector.eq(0).children('a').attr('href') === "#") filter.previousPage = null;
+        if(Number(pageSelector.last().prev().find('a').text()) === 0) filter.foundPages = 1;
+        else filter.foundPages = Number(pageSelector.last().prev().find('a').text());
+
+        if (pageSelector.eq(0).children('a').attr('href') === "#" || filter.foundPages == 1) filter.previousPage = null;
         else filter.previousPage = 'https://www3.animeflv.net' + pageSelector.eq(0).children('a').attr('href');
 
-        if (pageSelector.last().children('a').attr('href') === "#") filter.nextPage = null;
+        if (pageSelector.last().children('a').attr('href') === "#" || filter.foundPages == 1) filter.nextPage = null;
         else filter.nextPage = 'https://www3.animeflv.net' + pageSelector.last().children('a').attr('href');
-
-        filter.foundPages = Number(pageSelector.last().prev().find('a').text());
 
         return filter;
     }

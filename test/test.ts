@@ -9,9 +9,9 @@ describe('SCRAPPER SELECTORS', function () {
 		expect(anime).to.be.a('Object');
 	});
 
-	it('La función searchAnime debe devolver un arreglo', async () => {
+	it('La función searchAnime debe devolver un objeto', async () => {
 		const search = await searchAnime("One Piece");
-		expect(search).to.be.a('Array');
+		expect(search).to.be.a('Object');
 	});
 
 	it('Si existe un error en getAnimeInfo, debe devolver null', async () => {
@@ -19,9 +19,9 @@ describe('SCRAPPER SELECTORS', function () {
 		expect(anime).to.eql(null);
 	});
 
-	it('Si existe un error en searchAnime, debe devolver un arreglo vacío', async () => {
+	it('Si existe un error en searchAnime, debe devolver null', async () => {
 		const search = await searchAnime("ぼっち・ざ・ろっ");
-		expect(search).to.eql([]);
+		expect(search).to.eql(null);
 	});
 
 	it('getAnimeInfo("sword-art-online") debe devolver información acerca del anime "Sword Art Online"', async () => {
@@ -42,25 +42,34 @@ describe('SCRAPPER SELECTORS', function () {
 		});
 	});
 
-	it('searchAnime("High School of The Dead") debe devolver un array con DOS objetos', async () => {
+	it('searchAnime("High School of The Dead") debe devolver un objeto con DOS objetos dentro.', async () => {
 		const search = await searchAnime("High School of The Dead");
-		expect(search).to.eql([
+		expect(search).to.eql(
 			{
-				title: 'Highschool of the Dead',
-				cover: 'https://animeflv.net/uploads/animes/covers/4.jpg',
-				synopsis: 'El mundo entero esta siendo dominado por una enfermedad mortal, esto convierte a los humanos en zombies. En Japón, muchos estudiantes de la preparatoria Fujimi, y la enfermera de la escuela, estaran juntos trantando de sobrevivir al presente Apocalipsis. La historia se centra en Takashi Komuro, uno de los estudiantes que ha sobrevivido a est...',
-				id: 'highschool-of-the-dead',
-				type: 'Anime',
-				url: 'https://www3.animeflv.net/anime/highschool-of-the-dead'
-			},
-			{
-				title: 'Highschool of the Dead Ova',
-				cover: 'https://animeflv.net/uploads/animes/covers/402.jpg',
-				synopsis: 'Excelente anime que mezcla imagenes increibles de mujeres hermosas y un mundo invadido por zombies. Un grupo de estudiantes tratan de sobrevivir y libran grandes batallas cuerpo a cuerpo y con armas de primer nivel.',
-				id: 'highschool-of-the-dead-ovas',
-				type: 'OVA',
-				url: 'https://www3.animeflv.net/anime/highschool-of-the-dead-ovas'
+				previousPage: null,
+				nextPage: null,
+				foundPages: 1,
+				data: [
+				  {
+					title: 'Highschool of the Dead',
+					cover: 'https://animeflv.net/uploads/animes/covers/4.jpg',
+					synopsis: 'El mundo entero esta siendo dominado por una enfermedad mortal, esto convierte a los humanos en zombies. En Japón, muchos estudiantes de la preparatoria Fujimi, y la enfermera de la escuela, estaran juntos trantando de sobrevivir al presente Apocalipsis. La historia se centra en Takashi Komuro, uno de los estudiantes que ha sobrevivido a est...',
+					rating: '4.7',
+					id: 'highschool-of-the-dead',
+					type: 'Anime',
+					url: 'https://www3.animeflv.net/anime/highschool-of-the-dead'
+				  },
+				  {
+					title: 'Highschool of the Dead Ova',
+					cover: 'https://animeflv.net/uploads/animes/covers/402.jpg',
+					synopsis: 'Excelente anime que mezcla imagenes increibles de mujeres hermosas y un mundo invadido por zombies. Un grupo de estudiantes tratan de sobrevivir y libran grandes batallas cuerpo a cuerpo y con armas de primer nivel.',
+					rating: '4.7',
+					id: 'highschool-of-the-dead-ovas',
+					type: 'OVA',
+					url: 'https://www3.animeflv.net/anime/highschool-of-the-dead-ovas'
+				  }
+				]
 			}
-		]);
+		);
 	})
 });

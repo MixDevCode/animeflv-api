@@ -18,8 +18,20 @@
     "animeflv",
     "anime"
   ],
-  "author": "MixDevCode",
+  "contributors": [
+    {
+      "name": "MixDevCode",
+      "url": "https://github.com/MixDevCode/"
+    },
+    {
+      "name": "ShompiFlen",
+      "url": "https://github.com/Shompi"
+    }
+  ],
   "license": "ISC",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "dependencies": {
     "cheerio": "^1.0.0-rc.12",
     "cloudscraper": "^4.6.0"

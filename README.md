@@ -1,4 +1,4 @@
-AnimeFLV SCRAPPER ![Licence](https://img.shields.io/npm/l/animeflv-api-ts) ![Version](https://img.shields.io/npm/v/animeflv-api-ts) ![Known Vulnerabilities](https://snyk.io/test/github/mixdevcode/animeflv-api-ts/badge.svg)
+AnimeFLV SCRAPPER ![Licence](https://img.shields.io/npm/l/animeflv-api-ts) ![Version](https://img.shields.io/npm/v/animeflv-api-ts) ![Known Vulnerabilities](https://snyk.io/test/github/mixdevcode/animeflv-api-ts/badge.svg) ![Node Minimum Version](https://img.shields.io/badge/node-%3E%3D16.0.0-informational)
 ============
 [![NPM](https://nodei.co/npm/animeflv-api-ts.png)](https://nodei.co/npm/animeflv-api-ts/)
 
@@ -40,20 +40,26 @@ searchAnime("Overlord").then((result) => {
 
 ###### Respuesta
 
-Una lista JSON que contiene todos los animes encontrados utilizando el `query` especificado.
+Un objeto JSON que contiene todos los animes encontrados utilizando el `query` especificado.
 
 ```js
-[
-  {
-    title: 'Overlord II',
-    cover: 'https://animeflv.net/uploads/animes/covers/2856.jpg',
-    synopsis: 'Segunda temporada de Overlord.',
-    id: 'overlord-ii',
-    type: 'Anime',
-    url: 'https://www3.animeflv.net/anime/overlord-ii'
-  }
-  ...
-]
+{
+  previousPage: null,
+  nextPage: null,
+  foundPages: 1,
+  data: [
+    {
+      title: 'Overlord II',
+      cover: 'https://animeflv.net/uploads/animes/covers/2856.jpg',
+      synopsis: 'Segunda temporada de Overlord.',
+      rating: '4.7',
+      id: 'overlord-ii',
+      type: 'Anime',
+      url: 'https://www3.animeflv.net/anime/overlord-ii'
+    }
+    ...
+  ]
+}
 ```
 
 #### getAnimeInfo(params)
@@ -150,41 +156,105 @@ Una lista JSON con todos los animes en emisión del sitio.
 ]
 ```
 
-#### getComing()
+#### searchAnimesByFilter(params)
+
+|Params|Type|
+|-|-|
+|`opts`|FilterOptions|
+
+> **Note** Vease el ejemplo para entender el parámetro requerido por la función.
 
 ```js
-import { getComing } from 'animeflv-api-ts';
+import { searchAnimesByFilter } from 'animeflv-api-ts';
 
-getComing().then((result) => {
-  console.log(result);
-});
+searchAnimesByFilter({
+    types: ["Anime"],
+    genres: ["Acción", "Magia"],
+    statuses: ["Finalizado"]
+}).then((result) => {
+    console.log(result);
+})
 ```
 
 ###### Respuesta
 
-Una lista JSON con animes próximos a estrenarse.
+Un objeto JSON con los resultados encontrados de los filtros definidos.
 
 ```js
-[
-  {
-    title: 'Golden Kamuy 4th Season',
-    cover: 'https://animeflv.net/uploads/animes/covers/3686.jpg',
-    synopsis: 'Cuarta temporada de Golden Kamuy ',
-    rating: '4.8',
-    id: 'golden-kamuy-4th-season',
-    type: 'Anime',
-    url: 'https://www3.animeflv.net/anime/golden-kamuy-4th-season'
-  }
-  ...
-]
+{
+  previousPage: null,
+  nextPage: 'https://www3.animeflv.net/browse?genre%5B%5D=accion&genre%5B%5D=magia&status%5B%5D=2&type%5B%5D=tv&order=default&page=2',
+  foundPages: 44,
+  data: [
+    {
+      title: 'Arknights: Reimei Zensou',
+      cover: 'https://animeflv.net/uploads/animes/covers/3712.jpg',
+      synopsis: 'En la tierra de Terra, los desastres inexplicables están ocurriendo irregularmente en varios lugares. La mayoría de las personas allí viven en ciudades móviles que se han desarrollado durante un largo período de tiempo para escapar de los desastres.\n' +
+        'Las piedras preciosas con una enorme energía que quedaron en la tierra después del desastr...',
+      rating: '4.5',
+      id: 'arknights-reimei-zensou',
+      type: 'Anime',
+      url: 'https://www3.animeflv.net/anime/arknights-reimei-zensou'
+    }
+    ...
+  ]
+}
 ```
+
+#### searchAnimesBySpecificURL(params)
+
+|Params|Type|
+|-|-|
+|`url`|string|
+
+```js
+import { searchAnimesBySpecificURL } from 'animeflv-api-ts';
+
+searchAnimesBySpecificURL("https://www3.animeflv.net/browse?q=dragon+ball&page=2").then((result) => {
+    console.log(result);
+})
+```
+
+###### Respuesta
+
+Un objeto JSON con los resultados encontrados de la `url` especificada.
+
+```js
+{
+  previousPage: 'https://www3.animeflv.net/browse?q=dragon+ball&page=1',
+  nextPage: null,
+  foundPages: 2,
+  data: [
+    {
+      title: 'Dragon Ball Z Pelicula 10: El regreso del Guerrero Legendario',
+      cover: 'https://animeflv.net/uploads/animes/covers/1111.jpg',
+      synopsis: 'Goten, Trunks y Videl se aventuran a ir en busca de las Esferas del Dragon...',
+      rating: '4.2',
+      id: 'dragon-ball-z-pelicula-10',
+      type: 'Película',
+      url: 'https://www3.animeflv.net/anime/dragon-ball-z-pelicula-10'
+    }
+    ...
+  ]
+}
+```
+
+Disclaimer
+============
+El uso de animeflv-api-ts es exclusivamente para fines educativos y de investigación. No nos hacemos responsables del uso indebido o ilegal de la misma, incluyendo pero no limitando a la recolección de datos sin el consentimiento del propietario del sitio web, violación de los términos de uso del sitio, o cualquier otra actividad ilegal. Es responsabilidad del usuario final cumplir con todas las leyes y regulaciones aplicables en su jurisdicción antes de utilizar la librería.
+
+Además, al utilizar la animeflv-api-ts, el usuario acepta que es consciente de las posibles consecuencias legales o técnicas que puedan surgir de su uso. Estas consecuencias incluyen, pero no se limitan a, el bloqueo de su dirección IP por parte del sitio web, la violación de los términos de uso del sitio, y cualquier otra acción tomada por el propietario del sitio web para proteger su contenido.
+
+Si eres el propietario del sitio web y deseas que cesemos el desarrollo de animeflv-api-ts, te invitamos a contactarnos a través de <a href="mailto:soporte@mixdev.online?Subject=Propiedad%20de%20AnimeFLV">soporte@mixdev.online</a>. Haremos todo lo posible para cumplir con tu solicitud de manera rápida y eficiente.
+
+En resumen, el uso de animeflv-api-ts es bajo su propio riesgo.
 
 ## TODO
  - [x] Convertir el módulo a TS
  - [x] Agregar una función para obtener los últimos capítulos subidos
  - [x] Agregar una función para obtener los animes en emisión
  - [x] Agregar una función para obtener los próximos animes
- - [ ] Modificar las funciones en caso de existir una paginación en el sitio web.
+ - [x] Modificar las funciones en caso de existir una paginación en el sitio web.
 
 ## Contribuyentes
 
