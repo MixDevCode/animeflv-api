@@ -28,10 +28,10 @@ import * as animeflv from 'animeflv-api';
 
 > **Note** Si quieres saber más acerca de los tipos, constantes y funciones puedes visitar la [Wiki](https://github.com/MixDevCode/animeflv-api/wiki), aquí solo se listarán ejemplos de uso.
 
-#### searchAnime(params)
-|Params|Type|
-|-|-|
-|`query`|string|
+#### `searchAnime(params)` `=>` [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`
+|Params|Type|Required|
+|-|-|:-:|
+|`query`|string|✅|
 
 ```js
 import { searchAnime } from 'animeflv-api';
@@ -43,7 +43,7 @@ searchAnime("Overlord").then((result) => {
 
 ###### Respuesta
 
-Un objeto JSON que contiene todos los animes encontrados utilizando el `query` especificado.
+Un objeto de tipo [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) que contiene todos los animes encontrados utilizando el `query` especificado.
 
 ```js
 {
@@ -65,11 +65,11 @@ Un objeto JSON que contiene todos los animes encontrados utilizando el `query` e
 }
 ```
 
-#### getAnimeInfo(params)
+#### `getAnimeInfo(params)` `=>` [AnimeData](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`
 
-|Params|Type|
-|-|-|
-|`animeId`|string|
+|Params|Type|Required|
+|-|-|:-:|
+|`animeId`|string|✅|
 
 > **Note** el animeId es obtenido a través de la función `searchAnime` o removiendo `https://www3.animeflv.net/anime/` de la URL de un anime.
 ```js
@@ -82,7 +82,7 @@ getAnimeInfo("one-piece-tv").then((result) => {
 
 ###### Respuesta
 
-Un objeto JSON que contiene la información del anime solicitado con el `animeId` especificado.
+Un objeto de tipo [AnimeData](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) que contiene la información del anime solicitado con el `animeId` especificado.
 
 ```js
 {
@@ -107,7 +107,7 @@ Un objeto JSON que contiene la información del anime solicitado con el `animeId
 }
 ```
 
-#### getLatest()
+#### `getLatest()` `=>` [ChaperData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#chapterdata)
 
 ```js
 import { getLatest } from 'animeflv-api';
@@ -119,7 +119,7 @@ getLatest().then((result) => {
 
 ###### Respuesta
 
-Una lista JSON que contiene los últimos capítulos subidos al sitio web.
+Una lista de tipo [ChaperData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#chapterdata) que contiene los últimos capítulos subidos al sitio web.
 
 ```js
 [
@@ -133,7 +133,7 @@ Una lista JSON que contiene los últimos capítulos subidos al sitio web.
 ]
 ```
 
-#### getOnAir()
+#### `getOnAir()` `=>` [AnimeOnAirData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animeonairdata)
 
 ```js
 import { getOnAir } from 'animeflv-api';
@@ -145,7 +145,7 @@ getOnAir().then((result) => {
 
 ###### Respuesta
 
-Una lista JSON con todos los animes en emisión del sitio.
+Una lista de tipo [AnimeOnAirData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animeonairdata) con todos los animes en emisión del sitio.
 
 ```js
 [
@@ -159,11 +159,11 @@ Una lista JSON con todos los animes en emisión del sitio.
 ]
 ```
 
-#### searchAnimesByFilter(params)
+#### `searchAnimesByFilter(params)` `=>` [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`
 
-|Params|Type|
-|-|-|
-|`opts`|FilterOptions|
+|Params|Type|Required|
+|-|-|:-:|
+|`opts`|[FilterOptions](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#filteroptions)|❌|
 
 > **Note** Vease el ejemplo para entender el parámetro requerido por la función.
 
@@ -181,7 +181,7 @@ searchAnimesByFilter({
 
 ###### Respuesta
 
-Un objeto JSON con los resultados encontrados de los filtros definidos.
+Un objeto [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) con los resultados encontrados de los filtros definidos.
 
 ```js
 {
@@ -204,11 +204,11 @@ Un objeto JSON con los resultados encontrados de los filtros definidos.
 }
 ```
 
-#### searchAnimesBySpecificURL(params)
+#### searchAnimesBySpecificURL(params) `=>` [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`
 
-|Params|Type|
-|-|-|
-|`url`|string|
+|Params|Type|Required|
+|-|-|:-:|
+|`url`|string|✅|
 
 ```js
 import { searchAnimesBySpecificURL } from 'animeflv-api';
@@ -220,7 +220,7 @@ searchAnimesBySpecificURL("https://www3.animeflv.net/browse?q=dragon+ball&page=2
 
 ###### Respuesta
 
-Un objeto JSON con los resultados encontrados de la `url` especificada.
+Un objeto [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) con los resultados encontrados de la `url` especificada.
 
 ```js
 {
