@@ -28,7 +28,7 @@ import * as animeflv from 'animeflv-api';
 
 > **Note** Si quieres saber más acerca de los tipos, constantes y funciones puedes visitar la [Wiki](https://github.com/MixDevCode/animeflv-api/wiki), aquí solo se listarán ejemplos de uso.
 
-#### `searchAnime(params)` `=>` Promise<[AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`>
+### searchAnime(params) 
 |Params|Type|Required|
 |-|-|:-:|
 |`query`|string|✅|
@@ -43,7 +43,7 @@ searchAnime("Overlord").then((result) => {
 
 ###### Respuesta
 
-Un objeto de tipo [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) que contiene todos los animes encontrados utilizando el `query` especificado.
+Un objeto de tipo Promise<[AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`> que contiene todos los animes encontrados utilizando el `query` especificado.
 
 ```js
 {
@@ -65,7 +65,7 @@ Un objeto de tipo [AnimeFilterResults](https://github.com/MixDevCode/animeflv-ap
 }
 ```
 
-#### `getAnimeInfo(params)` `=>` Promise<[AnimeData](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`>
+### getAnimeInfo(params)
 
 |Params|Type|Required|
 |-|-|:-:|
@@ -82,7 +82,7 @@ getAnimeInfo("one-piece-tv").then((result) => {
 
 ###### Respuesta
 
-Un objeto de tipo [AnimeData](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) que contiene la información del anime solicitado con el `animeId` especificado.
+Un objeto de tipo Promise<[AnimeData](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animedata) | `null`> que contiene la información del anime solicitado con el `animeId` especificado.
 
 ```js
 {
@@ -107,7 +107,7 @@ Un objeto de tipo [AnimeData](https://github.com/MixDevCode/animeflv-api/wiki/Da
 }
 ```
 
-#### `getLatest()` `=>` Promise<[ChaperData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#chapterdata)>
+### getLatest()
 
 ```js
 import { getLatest } from 'animeflv-api';
@@ -119,7 +119,7 @@ getLatest().then((result) => {
 
 ###### Respuesta
 
-Una lista de tipo [ChaperData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#chapterdata) que contiene los últimos capítulos subidos al sitio web.
+Un arreglo de tipo Promise<[ChapterData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#chapterdata)> que contiene los últimos capítulos subidos al sitio web.
 
 ```js
 [
@@ -133,7 +133,7 @@ Una lista de tipo [ChaperData[ ]](https://github.com/MixDevCode/animeflv-api/wik
 ]
 ```
 
-#### `getOnAir()` `=>` Promise<[AnimeOnAirData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animeonairdata)>
+### getOnAir()
 
 ```js
 import { getOnAir } from 'animeflv-api';
@@ -145,7 +145,7 @@ getOnAir().then((result) => {
 
 ###### Respuesta
 
-Una lista de tipo [AnimeOnAirData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animeonairdata) con todos los animes en emisión del sitio.
+Un arreglo de tipo Promise<[AnimeOnAirData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animeonairdata)> con todos los animes en emisión del sitio.
 
 ```js
 [
@@ -159,7 +159,7 @@ Una lista de tipo [AnimeOnAirData[ ]](https://github.com/MixDevCode/animeflv-api
 ]
 ```
 
-#### `searchAnimesByFilter(params)` `=>` Promise<[AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`>
+### searchAnimesByFilter(params)
 
 |Params|Type|Required|
 |-|-|:-:|
@@ -181,7 +181,7 @@ searchAnimesByFilter({
 
 ###### Respuesta
 
-Un objeto [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) con los resultados encontrados de los filtros definidos.
+Un objeto Promise<[AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`> con los resultados encontrados de los filtros definidos.
 
 ```js
 {
@@ -204,7 +204,7 @@ Un objeto [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/D
 }
 ```
 
-#### searchAnimesBySpecificURL(params) `=>` Promise<[AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`>
+### searchAnimesBySpecificURL(params) 
 
 |Params|Type|Required|
 |-|-|:-:|
@@ -220,7 +220,7 @@ searchAnimesBySpecificURL("https://www3.animeflv.net/browse?q=dragon+ball&page=2
 
 ###### Respuesta
 
-Un objeto [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) con los resultados encontrados de la `url` especificada.
+Un objeto Promise<[AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`> con los resultados encontrados de la `url` especificada.
 
 ```js
 {
