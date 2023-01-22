@@ -28,7 +28,7 @@ import * as animeflv from 'animeflv-api';
 
 > **Note** Si quieres saber más acerca de los tipos, constantes y funciones puedes visitar la [Wiki](https://github.com/MixDevCode/animeflv-api/wiki), aquí solo se listarán ejemplos de uso.
 
-#### `searchAnime(params)` `=>` [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`
+#### `searchAnime(params)` `=>` Promise<[AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`>
 |Params|Type|Required|
 |-|-|:-:|
 |`query`|string|✅|
@@ -65,7 +65,7 @@ Un objeto de tipo [AnimeFilterResults](https://github.com/MixDevCode/animeflv-ap
 }
 ```
 
-#### `getAnimeInfo(params)` `=>` [AnimeData](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`
+#### `getAnimeInfo(params)` `=>` Promise<[AnimeData](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`>
 
 |Params|Type|Required|
 |-|-|:-:|
@@ -107,7 +107,7 @@ Un objeto de tipo [AnimeData](https://github.com/MixDevCode/animeflv-api/wiki/Da
 }
 ```
 
-#### `getLatest()` `=>` [ChaperData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#chapterdata)
+#### `getLatest()` `=>` Promise<[ChaperData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#chapterdata)>
 
 ```js
 import { getLatest } from 'animeflv-api';
@@ -133,7 +133,7 @@ Una lista de tipo [ChaperData[ ]](https://github.com/MixDevCode/animeflv-api/wik
 ]
 ```
 
-#### `getOnAir()` `=>` [AnimeOnAirData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animeonairdata)
+#### `getOnAir()` `=>` Promise<[AnimeOnAirData[ ]](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animeonairdata)>
 
 ```js
 import { getOnAir } from 'animeflv-api';
@@ -159,7 +159,7 @@ Una lista de tipo [AnimeOnAirData[ ]](https://github.com/MixDevCode/animeflv-api
 ]
 ```
 
-#### `searchAnimesByFilter(params)` `=>` [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`
+#### `searchAnimesByFilter(params)` `=>` Promise<[AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`>
 
 |Params|Type|Required|
 |-|-|:-:|
@@ -204,7 +204,7 @@ Un objeto [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/D
 }
 ```
 
-#### searchAnimesBySpecificURL(params) `=>` [AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`
+#### searchAnimesBySpecificURL(params) `=>` Promise<[AnimeFilterResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#animefilterresults) | `null`>
 
 |Params|Type|Required|
 |-|-|:-:|
