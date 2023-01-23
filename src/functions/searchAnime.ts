@@ -7,7 +7,7 @@ import { SearchAnimeResults } from "../types";
 export async function searchAnime(query: string): Promise<SearchAnimeResults | null> {
 
     if (!query || (typeof query) !== "string")
-        throw new Error(`TypeError: El parámetro query debe ser una string no vacía, pasaste: ${query}`, { cause: `query: ${query}` });
+        throw new TypeError(`El parámetro query debe ser una string no vacía, pasaste: ${query}`, { cause: `query: ${query}` });
 
     try {
         CloudscraperOptions.uri = 'https://www3.animeflv.net/browse?q=' + query.toLowerCase().replace(/\s+/g, "+");
