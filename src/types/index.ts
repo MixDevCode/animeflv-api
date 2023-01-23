@@ -1,13 +1,11 @@
-import { AnimeGenres, AnimeStatuses, AnimeStatusEnum, AnimeTypes, FilterOrderEnum } from "../constants";
+import { AnimeGenres, AnimeStatuses, AnimeTypes, FilterOrderEnum } from "../constants";
 
-/** Puede que hayan status faltantes */
 export type AnimeStatus = typeof AnimeStatuses[number];
-/** Puede que hayan tipos faltantes */
 export type AnimeType = typeof AnimeTypes[number];
-
 export type AnimeGenre = typeof AnimeGenres[number];
 export type FilterOrderType = keyof typeof FilterOrderEnum;
 export type FilterAnimeResults = SearchAnimeResults
+
 export interface PartialAnimeData {
     /** Título del animé */
     title: string
