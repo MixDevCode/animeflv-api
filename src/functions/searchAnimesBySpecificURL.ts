@@ -1,17 +1,17 @@
 import { load } from "cheerio";
 import cloudscraper from "cloudscraper";
 import { CloudscraperOptions } from "../constants";
-import { AnimeFilterResults } from "../types";
+import { SearchAnimeResults } from "../types";
 import { scrapSearchAnimeData } from "../utils";
 
-export async function searchAnimesBySpecificURL(url: string): Promise<AnimeFilterResults | null> {
+export async function searchAnimesBySpecificURL(url: string): Promise<SearchAnimeResults | null> {
     try {
         CloudscraperOptions.uri = url;
 
         const specificData = (await cloudscraper(CloudscraperOptions)) as string;
         const $ = load(specificData);
 
-        const specific: AnimeFilterResults = {
+        const specific: SearchAnimeResults = {
             previousPage: null,
             nextPage: null,
             foundPages: 0,
@@ -19,10 +19,10 @@ export async function searchAnimesBySpecificURL(url: string): Promise<AnimeFilte
         }
 
         specific.data = scrapSearchAnimeData($)
-        
+
         const pageSelector = $('body > div.Wrapper > div > div > main > div > ul > li')
 
-        if(Number(pageSelector.last().prev().find('a').text()) === 0) specific.foundPages = 1;
+        if (Number(pageSelector.last().prev().find('a').text()) === 0) specific.foundPages = 1;
         else specific.foundPages = Number(pageSelector.last().prev().find('a').text());
 
         if (pageSelector.eq(0).children('a').attr('href') === "#" || specific.foundPages == 1) specific.previousPage = null;

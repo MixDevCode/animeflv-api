@@ -1,7 +1,7 @@
 import { load } from "cheerio"
 import cloudscraper from "cloudscraper"
 import { AnimeGenres, AnimeStatusEnum, AnimeTypeEnum, CloudscraperOptions, FilterOrderEnum } from "../constants"
-import { AnimeFilterResults, AnimeStatus, AnimeType, FilterOptions } from "../types"
+import { SearchAnimeResults, AnimeStatus, AnimeType, FilterOptions, FilterAnimeResults } from "../types"
 import { scrapSearchAnimeData } from "../utils"
 
 function generateRequestUrl(options?: FilterOptions): string {
@@ -59,7 +59,7 @@ function generateRequestUrl(options?: FilterOptions): string {
     return FinalUrl.toString()
 }
 
-export async function searchAnimesByFilter(opts?: FilterOptions): Promise<AnimeFilterResults | null> {
+export async function searchAnimesByFilter(opts?: FilterOptions): Promise<FilterAnimeResults | null> {
     try {
         /** La url del request con los filtros ya puestos */
         const formatedUrl = generateRequestUrl(opts)
@@ -69,7 +69,7 @@ export async function searchAnimesByFilter(opts?: FilterOptions): Promise<AnimeF
         const filterData = (await cloudscraper(CloudscraperOptions)) as string;
         const $ = load(filterData);
 
-        const filter: AnimeFilterResults = {
+        const filter: SearchAnimeResults = {
             previousPage: null,
             nextPage: null,
             foundPages: 0,
@@ -80,7 +80,7 @@ export async function searchAnimesByFilter(opts?: FilterOptions): Promise<AnimeF
 
         const pageSelector = $('body > div.Wrapper > div > div > main > div > ul > li');
 
-        if(Number(pageSelector.last().prev().find('a').text()) === 0) filter.foundPages = 1;
+        if (Number(pageSelector.last().prev().find('a').text()) === 0) filter.foundPages = 1;
         else filter.foundPages = Number(pageSelector.last().prev().find('a').text());
 
         if (pageSelector.eq(0).children('a').attr('href') === "#" || filter.foundPages == 1) filter.previousPage = null;
