@@ -5,6 +5,10 @@ import { SearchAnimeResults } from "../types";
 import { scrapSearchAnimeData } from "../utils";
 
 export async function searchAnimesBySpecificURL(url: string): Promise<SearchAnimeResults | null> {
+
+    if (!url || (typeof url) !== "string")
+        throw new Error(`TypeError: Parámetro url debe ser una string no vacía, pasaste: ${url}`, { cause: "url is not a valid url." });
+
     try {
         CloudscraperOptions.uri = url;
 

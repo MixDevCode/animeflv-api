@@ -1,5 +1,5 @@
-const { searchAnime } = require('../dist')
-searchAnime().then(result => {
+const { searchAnimesBySpecificURL } = require('../dist')
+searchAnimesBySpecificURL().then(result => {
     console.log(result);
 
 }).catch(err => {

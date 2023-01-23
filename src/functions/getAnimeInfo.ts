@@ -4,6 +4,11 @@ import cloudscraper from "cloudscraper";
 import type { AnimeData, AnimeGenre, AnimeStatus, AnimeType } from "../types";
 
 export async function getAnimeInfo(animeId: string): Promise<AnimeData | null> {
+
+    if (!animeId || (typeof animeId !== "string")) {
+        throw new Error(`TypeError: El parámetro animeId debe ser una string no vacía, pasaste: ${animeId}`, { cause: `animeId: ${animeId}` });
+    }
+
     try {
 
         CloudscraperOptions.uri = 'https://www3.animeflv.net/anime/' + animeId;
