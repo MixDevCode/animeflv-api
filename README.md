@@ -43,7 +43,7 @@ searchAnime("Overlord").then((result) => {
 
 ###### Respuesta
 
-Un objeto de tipo Promise<[FilterAnimeResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#filteranimeresults) | `null`> que contiene todos los animes encontrados utilizando el `query` especificado.
+Un objeto de tipo Promise<[SearchAnimeResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#searchanimeresults) | `null`> que contiene todos los animes encontrados utilizando el `query` especificado.
 
 ```js
 {
@@ -181,7 +181,7 @@ searchAnimesByFilter({
 
 ###### Respuesta
 
-Un objeto Promise<[FilterAnimeResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#searchanimeresults) | `null`> con los resultados encontrados de los filtros definidos.
+Un objeto Promise<[FilterAnimeResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#filteranimeresults) | `null`> con los resultados encontrados de los filtros definidos.
 
 ```js
 {
@@ -220,7 +220,7 @@ searchAnimesBySpecificURL("https://www3.animeflv.net/browse?q=dragon+ball&page=2
 
 ###### Respuesta
 
-Un objeto Promise<[FilterAnimeResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#searchanimeresults) | `null`> con los resultados encontrados de la `url` especificada.
+Un objeto Promise<[SearchAnimeResults](https://github.com/MixDevCode/animeflv-api/wiki/Datatypes#searchanimeresults) | `null`> con los resultados encontrados de la `url` especificada.
 
 ```js
 {
