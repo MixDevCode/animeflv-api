@@ -1,7 +1,7 @@
 {
   "include": ["src/**/*.ts", "src/*.d.ts"],
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "ES2022",
     "module": "CommonJS",
     "moduleResolution": "Node",
     "types": ["mocha"],
