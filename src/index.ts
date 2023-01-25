@@ -1,6 +1,6 @@
 export {
-    AnimeData, SearchAnimeResults as AnimeFilterResults, AnimeGenre, AnimeOnAirData, AnimeStatus, AnimeType, ChapterData, PartialAnimeData as SearchAnimeData,
-    FilterOptions
+    AnimeData, SearchAnimeResults, AnimeGenre, AnimeOnAirData, AnimeStatus, AnimeType, ChapterData, PartialAnimeData,
+    FilterOptions, FilterAnimeResults, FilterOrderType
 } from "./types"
 export * from "./constants"
 export * from "./functions"
