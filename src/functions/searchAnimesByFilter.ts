@@ -1,8 +1,7 @@
-import { load } from "cheerio"
 import cloudscraper from "cloudscraper"
 import { AnimeGenres, AnimeStatusEnum, AnimeTypeEnum, CloudscraperOptions, FilterOrderEnum } from "../constants"
-import { SearchAnimeResults, AnimeStatus, AnimeType, FilterOptions, FilterAnimeResults } from "../types"
-import { scrapSearchAnimeData } from "../utils"
+import { AnimeStatus, AnimeType, FilterOptions, FilterAnimeResults } from "../types"
+import { executeSearch } from "../utils"
 
 function generateRequestUrl(options?: FilterOptions): string {
     const quitarAcentos = (cadena: string) => {
@@ -67,29 +66,8 @@ export async function searchAnimesByFilter(opts?: FilterOptions): Promise<Filter
         CloudscraperOptions.uri = formatedUrl;
 
         const filterData = (await cloudscraper(CloudscraperOptions)) as string;
-        const $ = load(filterData);
 
-        const filter: SearchAnimeResults = {
-            previousPage: null,
-            nextPage: null,
-            foundPages: 0,
-            data: []
-        }
-
-        filter.data = scrapSearchAnimeData($)
-
-        const pageSelector = $('body > div.Wrapper > div > div > main > div > ul > li');
-
-        if (Number(pageSelector.last().prev().find('a').text()) === 0) filter.foundPages = 1;
-        else filter.foundPages = Number(pageSelector.last().prev().find('a').text());
-
-        if (pageSelector.eq(0).children('a').attr('href') === "#" || filter.foundPages == 1) filter.previousPage = null;
-        else filter.previousPage = 'https://www3.animeflv.net' + pageSelector.eq(0).children('a').attr('href');
-
-        if (pageSelector.last().children('a').attr('href') === "#" || filter.foundPages == 1) filter.nextPage = null;
-        else filter.nextPage = 'https://www3.animeflv.net' + pageSelector.last().children('a').attr('href');
-
-        return filter;
+        return executeSearch(filterData)
     }
 
     catch {
