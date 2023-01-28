@@ -1,1 +1,3 @@
-export { scrapSearchAnimeData } from "./scrapAnimeData";
+export * from "./scrapAnimeData";
+export * from "./getPrevAndNextPages";
+export * from "./executeSearch";
