@@ -11,18 +11,20 @@ export async function getLatest(): Promise<ChapterData[]> {
         const chaptersData = (await cloudscraper(CloudscraperOptions)) as string;
         const $ = load(chaptersData);
 
+        const chapterSelector = $('body > div.Wrapper > div > div > div > main > ul.ListEpisodios.AX.Rows.A06.C04.D03 > li');
+
         const chapters: ChapterData[] = []
-        if ($('body > div.Wrapper > div > div > div > main > ul.ListEpisodios.AX.Rows.A06.C04.D03 > li').length > 0) {
-            $('body > div.Wrapper > div > div > div > main > ul.ListEpisodios.AX.Rows.A06.C04.D03 > li').each((i, el) => {
-                const temp: ChapterData = {
+        if (chapterSelector.length > 0) {
+
+            chapterSelector.each((i, el) => {
+                chapters.push({
                     title: $(el).find('strong').text(),
                     chapter: Number($(el).find('span.Capi').text().replace("Episodio ", "")),
                     cover: 'https://animeflv.net' + ($(el).find('img').attr('src') as string),
                     url: 'https://www3.animeflv.net' + $(el).find('a').attr('href') as string
-                }
-
-                chapters.push(temp);
+                });
             });
+
         }
 
         return chapters;
