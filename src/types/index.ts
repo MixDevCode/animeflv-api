@@ -53,8 +53,15 @@ export interface AnimeData {
     /** Array con los géneros (etiquetas) del anime */
     genres: AnimeGenre[]
     /** Número de episodios que tiene este animé */
-    episodes: number
+    episodes: EpisodeData[]
     /** La URL directa a la pagina del animé */
+    url: string
+}
+
+export interface EpisodeData {
+    /** Número del episodio */
+    number: number
+    /** Link del episodio */
     url: string
 }
 
